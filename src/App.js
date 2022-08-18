@@ -40,8 +40,6 @@ export const App = () => {
     console.log(arrOfStrings, "strings");
     console.log(chunks, "chunks");
 
-    // console.log(parseInt(chunks[0].reverse().join("")), "number");
-    // console.log(chunkToNumber(chunks[0]), "chunk");
     for (let i = 0; i < arrOfStrings.length; i++) {
       if (arrOfStrings[i].length === 1) {
         return (result = arrOfStrings[i][0]);
@@ -64,32 +62,34 @@ export const App = () => {
           end = local.teh;
         return (result = `${second} ${and} ${first}${end}`);
       }
+      //TODO: 2 w 1 (e7da w ethna)
       if (arrOfStrings[i].length === 3) {
-        let and = "";
-        if (chunkToNumber(chunks[i]) > 19 && parseInt(chunks[i][1]) !== 0) {
-          and = "و";
-        }
+        // let and = "";
+        // if (chunkToNumber(chunks[i]) > 19 && parseInt(chunks[i][1]) !== 0) {
+        //   and = "و";
+        // }
         let first = "";
-        if (parseInt(chunks[i][2]) > 0) {
-          first = arrOfStrings[i][2];
+        if (parseInt(chunks[i][0]) > 0) {
+          first = arrOfStrings[i][0];
         }
         let second = "";
         if (parseInt(chunks[i][1]) > 0) {
           second = arrOfStrings[i][1];
         }
-        let third = arrOfStrings[i][0];
+        let third = arrOfStrings[i][2];
         let end = "";
-        if (parseInt(chunks[i][0]) === 1 && parseInt(chunks[i][1]) === 0)
-          end = local.teh;
+        // if (parseInt(chunks[i][0]) === 1 && parseInt(chunks[i][1]) === 0)
+        //   end = local.teh;
         console.log(chunks[i][2], first, "first");
         console.log(chunks[i][1], second, "second");
         console.log(third, "third");
-        return (result = `${third} ${and} ${second} ${and} ${first}${end}`);
+        return (result = `${third} ${first} ${second}${end}`);
       }
     }
-    //TODO: X0X
-    //TODO: 100 teh 
-    //TODO: 2 w 1 
+    //TODO: w condition
+    //TODO: x10 teh
+
+    //TODO: Thousands and Millions 
 
     return result;
   };
