@@ -1,0 +1,14 @@
+{
+  "zero": "صفر",
+  "one": { "one": "واحد", "ten": "عشر" },
+  "two": { "two": "اثنين", "twenty": "عشرون" },
+  "three": { "three": "ثلاثة", "thirty": "ثلاثون" },
+  "four": { "four": "أربعة", "forty": "أربعون" },
+  "five": { "five": "خمسة", "fifty": "خمسون" },
+  "six": { "six": "ستة", "sixty": "ستون" },
+  "seven": { "seven": "سبعة", "seventy": "سبعون" },
+  "eight": { "eight": "ثمانية", "eighty": "ثمانون" },
+  "nine": { "nine": "تسع", "ninety": "تسعون" },
+
+  "teh": "ة"
+}
