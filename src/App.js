@@ -60,9 +60,14 @@ export const App = () => {
         let end = "";
         if (parseInt(chunks[i][0]) === 1 && parseInt(chunks[i][1]) === 0)
           end = local.teh;
+        if (chunks[i][0] === "1" && chunks[i][1] === "1") {
+          second = "إحدى";
+        }
+        if (chunks[i][0] === "1" && chunks[i][1] === "2") {
+          second = "إثنا";
+        }
         return (result = `${second} ${and} ${first}${end}`);
       }
-      //TODO: 2 w 1 (e7da w ethna)
       if (arrOfStrings[i].length === 3) {
         // let and = "";
         // if (chunkToNumber(chunks[i]) > 19 && parseInt(chunks[i][1]) !== 0) {
@@ -80,6 +85,12 @@ export const App = () => {
         let end = "";
         // if (parseInt(chunks[i][0]) === 1 && parseInt(chunks[i][1]) === 0)
         //   end = local.teh;
+        if (chunks[i][0] === "1" && chunks[i][1] === "1") {
+          first = "إحدى";
+        }
+        if (chunks[i][0] === "2" && chunks[i][1] === "1") {
+          first = "إثنا";
+        }
         console.log(chunks[i][2], first, "first");
         console.log(chunks[i][1], second, "second");
         console.log(third, "third");
@@ -89,7 +100,7 @@ export const App = () => {
     //TODO: w condition
     //TODO: x10 teh
 
-    //TODO: Thousands and Millions 
+    //TODO: Thousands and Millions
 
     return result;
   };
