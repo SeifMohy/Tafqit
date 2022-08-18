@@ -1,12 +1,10 @@
 import React from "react";
 import "./App.css";
 import { useState } from "react";
-import * as local from "./ar.json";
 import * as arr from "./ararr.json";
 
 export const App = () => {
   const [inputNumber, setInputNumber] = useState("0");
-  console.log(Object.values(arr.default[0][0])[0]);
   const prefix = "فقط";
   const suffix = "جنيه مصري لا غير";
 
@@ -18,7 +16,7 @@ export const App = () => {
   };
 
   const tafqit = (inputNumber) => {
-    let result = local.zero;
+    let result = "صفر";
     let chunks = [];
     let arrOfStrings = [];
 
@@ -58,47 +56,41 @@ export const App = () => {
           second = arrOfStrings[i][0];
         }
         let end = "";
-        if (parseInt(chunks[i][0]) === 1 && parseInt(chunks[i][1]) === 0)
-          end = local.teh;
-        if (chunks[i][0] === "1" && chunks[i][1] === "1") {
-          second = "إحدى";
-        }
-        if (chunks[i][0] === "1" && chunks[i][1] === "2") {
-          second = "إثنا";
-        }
+        if (chunks[i][0] === "1" && chunks[i][1] === "0") end = "ة";
+        if (chunks[i][0] === "1" && chunks[i][1] === "1") second = "إحدى";
+        if (chunks[i][0] === "1" && chunks[i][1] === "2") second = "إثنا";
+
         return (result = `${second} ${and} ${first}${end}`);
       }
       if (arrOfStrings[i].length === 3) {
-        // let and = "";
-        // if (chunkToNumber(chunks[i]) > 19 && parseInt(chunks[i][1]) !== 0) {
-        //   and = "و";
-        // }
+        let andTens = "";
+        console.log(chunks[i].slice(0, 2));
+        if (
+          chunkToNumber(chunks[i].slice(0, 2)) > 19 &&
+          parseInt(chunks[i][0]) !== 0
+        ) {
+          andTens = "و";
+        }
         let first = "";
-        if (parseInt(chunks[i][0]) > 0) {
-          first = arrOfStrings[i][0];
-        }
+        if (parseInt(chunks[i][0]) > 0) first = arrOfStrings[i][0];
+
         let second = "";
-        if (parseInt(chunks[i][1]) > 0) {
-          second = arrOfStrings[i][1];
-        }
+        if (parseInt(chunks[i][1]) > 0) second = arrOfStrings[i][1];
+
         let third = arrOfStrings[i][2];
         let end = "";
-        // if (parseInt(chunks[i][0]) === 1 && parseInt(chunks[i][1]) === 0)
-        //   end = local.teh;
-        if (chunks[i][0] === "1" && chunks[i][1] === "1") {
-          first = "إحدى";
-        }
-        if (chunks[i][0] === "2" && chunks[i][1] === "1") {
-          first = "إثنا";
-        }
+        let andHunds = "و";
+        if (chunks[i][0] === "0" && chunks[i][1] === "0") andHunds = "";
+        if (chunks[i][0] === "0" && chunks[i][1] === "1") end = "ة";
+        if (chunks[i][0] === "1" && chunks[i][1] === "1") first = "إحدى";
+        if (chunks[i][0] === "2" && chunks[i][1] === "1") first = "إثنا";
+
         console.log(chunks[i][2], first, "first");
         console.log(chunks[i][1], second, "second");
         console.log(third, "third");
-        return (result = `${third} ${first} ${second}${end}`);
+        return (result = `${third} ${andHunds} ${first} ${andTens} ${second}${end}`);
       }
     }
-    //TODO: w condition
-    //TODO: x10 teh
 
     //TODO: Thousands and Millions
 
