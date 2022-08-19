@@ -19,6 +19,7 @@ export const App = () => {
     let result = "صفر";
     let chunks = [];
     let arrOfStrings = [];
+    let tafqit = [];
 
     const numberArr = inputNumber.split("").reverse();
 
@@ -30,17 +31,14 @@ export const App = () => {
     for (let i = 0; i < chunks.length; i++) {
       let strings = [];
       for (let j = 0; j < chunks[i].length; j++) {
-        console.log(getNumberInArabicWArr(arr, parseInt(chunks[i][j]), j));
         strings.push(getNumberInArabicWArr(arr, parseInt(chunks[i][j]), j));
       }
       arrOfStrings.push(strings);
     }
-    console.log(arrOfStrings, "strings");
-    console.log(chunks, "chunks");
 
     for (let i = 0; i < arrOfStrings.length; i++) {
       if (arrOfStrings[i].length === 1) {
-        return (result = arrOfStrings[i][0]);
+        tafqit.push(arrOfStrings[i][0]);
       }
       if (arrOfStrings[i].length === 2) {
         let and = "";
@@ -60,11 +58,10 @@ export const App = () => {
         if (chunks[i][0] === "1" && chunks[i][1] === "1") second = "إحدى";
         if (chunks[i][0] === "1" && chunks[i][1] === "2") second = "إثنا";
 
-        return (result = `${second} ${and} ${first}${end}`);
+        tafqit.push(`${second} ${and} ${first}${end}`);
       }
       if (arrOfStrings[i].length === 3) {
         let andTens = "";
-        console.log(chunks[i].slice(0, 2));
         if (
           chunkToNumber(chunks[i].slice(0, 2)) > 19 &&
           parseInt(chunks[i][0]) !== 0
@@ -85,14 +82,16 @@ export const App = () => {
         if (chunks[i][0] === "1" && chunks[i][1] === "1") first = "إحدى";
         if (chunks[i][0] === "2" && chunks[i][1] === "1") first = "إثنا";
 
-        console.log(chunks[i][2], first, "first");
-        console.log(chunks[i][1], second, "second");
-        console.log(third, "third");
-        return (result = `${third} ${andHunds} ${first} ${andTens} ${second}${end}`);
+        tafqit.push(`${third} ${andHunds} ${first} ${andTens} ${second}${end}`);
       }
     }
 
-    //TODO: Thousands and Millions
+    console.log("tafqit", tafqit);
+    if (tafqit.length === 1) result = `${tafqit[0]}`;
+    if (tafqit.length === 2) result = `${tafqit[1]} ألف و${tafqit[0]}`;
+    if (tafqit.length === 3) result = `${tafqit[2]} مليون و${tafqit[1]} ألف و${tafqit[0]}`;
+
+    //TODO: 1 and 2 and x000 for K and M
 
     return result;
   };
