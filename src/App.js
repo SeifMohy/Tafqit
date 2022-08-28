@@ -28,6 +28,8 @@ export const App = () => {
       chunks.push(chunk);
     }
 
+    console.log(chunks, "chunks");
+
     for (let i = 0; i < chunks.length; i++) {
       let strings = [];
       for (let j = 0; j < chunks[i].length; j++) {
@@ -88,8 +90,37 @@ export const App = () => {
 
     console.log("tafqit", tafqit);
     if (tafqit.length === 1) result = `${tafqit[0]}`;
-    if (tafqit.length === 2) result = `${tafqit[1]} ألف و${tafqit[0]}`;
-    if (tafqit.length === 3) result = `${tafqit[2]} مليون و${tafqit[1]} ألف و${tafqit[0]}`;
+    if (tafqit.length === 2) {
+      let thousand = "ألف";
+      let w = "و";
+      let first = tafqit[1];
+      let second = tafqit[0];
+      if (chunkToNumber(chunks[0]) < 1) {
+        w = "";
+      }
+      if (chunkToNumber(chunks[1]) <= 10) {
+        thousand = "آلاف";
+      }
+      if (chunks[1][0] === "1" && chunks[1].length < 2) {
+        first = "";
+        thousand = "ألف";
+      }
+      if (chunks[1][0] === "2" && chunks[1].length < 2) {
+        first = "";
+        thousand = "ألفين";
+      }
+      console.log(first, "first");
+      console.log(thousand, "thousand");
+      console.log(w, "w");
+      console.log(chunkToNumber(chunks[0]));
+      console.log(second, "second");
+      console.log(chunkToNumber(chunks[1]), "alaf");
+
+      result = `${first} ${thousand} ${w} ${second}`;
+    }
+
+    if (tafqit.length === 3)
+      result = `${tafqit[2]} مليون و${tafqit[1]} ألف و${tafqit[0]}`;
 
     //TODO: 1 and 2 and x000 for K and M
 
