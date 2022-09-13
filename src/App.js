@@ -101,28 +101,49 @@ export const App = () => {
       if (chunkToNumber(chunks[1]) <= 10) {
         thousand = "آلاف";
       }
-      if (chunks[1][0] === "1" && chunks[1].length < 2) {
+      if (chunkToNumber(chunks[1]) === 1 && chunks[1].length < 2) {
         first = "";
         thousand = "ألف";
       }
-      if (chunks[1][0] === "2" && chunks[1].length < 2) {
+      if (chunkToNumber(chunks[1]) === 2 && chunks[1].length < 2) {
         first = "";
         thousand = "ألفين";
       }
-      console.log(first, "first");
-      console.log(thousand, "thousand");
-      console.log(w, "w");
-      console.log(chunkToNumber(chunks[0]));
-      console.log(second, "second");
-      console.log(chunkToNumber(chunks[1]), "alaf");
-
       result = `${first} ${thousand} ${w} ${second}`;
     }
 
-    if (tafqit.length === 3)
-      result = `${tafqit[2]} مليون و${tafqit[1]} ألف و${tafqit[0]}`;
+    if (tafqit.length === 3) {
+      let million = "مليون";
+      let thousand = "ألف";
+      let w = "و";
+      let w2 = "و";
+      let first = tafqit[2];
+      let second = tafqit[1];
+      let third = tafqit[0];
 
-    //TODO: 1 and 2 and x000 for K and M
+      if (chunkToNumber(chunks[2]) === 1 && chunks[2].length < 2) {
+        first = "";
+      }
+      if (chunkToNumber(chunks[1]) === 0) {
+        thousand = "";
+        w2 = "";
+      }
+      if (chunkToNumber(chunks[0]) === 0) {
+        w = "";
+      }
+      // if (chunkToNumber(chunks[1]) <= 10 && chunkToNumber(chunks[1]) !== 0) {
+      //   thousand = "آلاف";
+      //   w2 = "";
+      // }
+      console.log(chunkToNumber(chunks[1]), "chunk K");
+      console.log(first, "first");
+      console.log(thousand, "thousand");
+      console.log(w, "w");
+      console.log(second, "second");
+      console.log(third, "third");
+      result = `${first} ${million} ${w2} ${second} ${thousand} ${w} ${third}`;
+    }
+    //TODO: 1 and 2 and x000 for M
 
     return result;
   };
