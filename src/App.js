@@ -11,6 +11,7 @@ export const App = () => {
   const getNumberInArabicWArr = (array, number, xPosition) => {
     return Object.values(array.default[parseInt(number)][xPosition])[0];
   };
+
   const chunkToNumber = (chunk) => {
     return parseInt(chunk.reverse().join(""));
   };
@@ -23,6 +24,7 @@ export const App = () => {
 
     const numberArr = inputNumber.split("").reverse();
 
+    // tafqit 3 digits by three
     for (let i = 0; i < numberArr.length; i += 3) {
       let chunk = numberArr.slice(i, i + 3);
       chunks.push(chunk);
@@ -80,10 +82,10 @@ export const App = () => {
         let end = "";
         let andHunds = "و";
         if (chunks[i][0] === "0" && chunks[i][1] === "0") andHunds = "";
+        if (chunkToNumber(chunks[i]) < 100) andHunds = "";
         if (chunks[i][0] === "0" && chunks[i][1] === "1") end = "ة";
         if (chunks[i][0] === "1" && chunks[i][1] === "1") first = "إحدى";
         if (chunks[i][0] === "2" && chunks[i][1] === "1") first = "إثنا";
-
         tafqit.push(`${third} ${andHunds} ${first} ${andTens} ${second}${end}`);
       }
     }
@@ -121,29 +123,40 @@ export const App = () => {
       let second = tafqit[1];
       let third = tafqit[0];
 
+      if (chunkToNumber(chunks[2]) === 2 && chunks[2].length < 2) {
+        million = "مليونان";
+        first = "";
+      }
+
       if (chunkToNumber(chunks[2]) === 1 && chunks[2].length < 2) {
         first = "";
       }
       if (chunkToNumber(chunks[1]) === 0) {
         thousand = "";
         w2 = "";
+        w = "";
       }
       if (chunkToNumber(chunks[0]) === 0) {
         w = "";
       }
+      if (chunkToNumber(chunks[1]) === 0 && chunkToNumber(chunks[0]) !== 0) {
+        w = "و";
+      }
+      // if (chunkToNumber(chunks[0]) === 0) {
+      //   w = "و";
+      // }
+      // if (chunkToNumber(chunks[1]) === 0 && chunkToNumber(chunks[0]) === 0) {
+      //   w = "";
+      //   w2 = "";
+      //   thousand = "";
+      // }
       // if (chunkToNumber(chunks[1]) <= 10 && chunkToNumber(chunks[1]) !== 0) {
       //   thousand = "آلاف";
       //   w2 = "";
       // }
-      console.log(chunkToNumber(chunks[1]), "chunk K");
-      console.log(first, "first");
-      console.log(thousand, "thousand");
-      console.log(w, "w");
-      console.log(second, "second");
-      console.log(third, "third");
+      console.log(chunks, "chunks");
       result = `${first} ${million} ${w2} ${second} ${thousand} ${w} ${third}`;
     }
-    //TODO: 1 and 2 and x000 for M
 
     return result;
   };
